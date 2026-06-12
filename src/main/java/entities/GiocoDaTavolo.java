@@ -20,7 +20,7 @@ public class GiocoDaTavolo extends Gioco {
     }
 
     public void numeroDiGiocatoriAcc(int numeroGiocatori) {
-        if (numeroGiocatori < 2 || numeroGiocatori > 10) {
+        if (numeroGiocatori < 2 || numeroGiocatori > 11) {
             throw new NumGiocatoriAcc("numero di giocatori non valido");
         }
     }

@@ -127,4 +127,11 @@ public class Collezione {
 
     }
 
+
+    @Override
+    public String toString() {
+        return "Collezione{" +
+                "collezione=" + collezione +
+                '}';
+    }
 }

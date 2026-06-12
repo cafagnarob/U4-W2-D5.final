@@ -8,6 +8,7 @@ import entities.enums.Genere;
 import entities.enums.Piattaforma;
 
 import java.time.LocalDate;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Application {
@@ -77,8 +78,8 @@ public class Application {
 
 
         System.out.println("-------- benvenuto a GAMESTOP------");
-
-        while (true) {
+        boolean flag = true;
+        while (flag) {
 
             System.out.println("**** SELEZIONA ****");
             System.out.println("1 per consultare la lista prodotti ");
@@ -90,142 +91,197 @@ public class Application {
             System.out.println("7 per aggiornare/sostituire un gioco");
             System.out.println("8 per stampare le statistiche ( numero totale di videogiochi, numero totale di giochi da tavolo, il gioco più costoso, la media prezzo del negozio)");
             System.out.println("0 per uscire");
-            int scelta = Integer.parseInt(scanner.nextLine().trim());
+            try {
+                int scelta = Integer.parseInt(scanner.nextLine().trim());
+                switch (scelta) {
+                    case 0 -> {
+                        System.out.println("-------CHIUSURA PROGRAMMA------");
+                        flag = false;
+                    }
+                    case 1 -> {
+                        System.out.println("------ LISTA PRODOTTI------");
+                        System.out.println(gameStop);
+                    }
+                    case 2 -> {
+                        boolean flag2 = true;
+                        while (flag2) {
+                            System.out.println("----SELEZIONA-----");
+                            System.out.println("----1 per creare un videogioco-----");
+                            System.out.println("----2 per creare un gioco da tavola-----");
+                            System.out.println("----0 per uscire dalla creazione del gico-----");
+                            int tipoDiGioco = Integer.parseInt(scanner.nextLine().trim());
+                            switch (tipoDiGioco) {
+                                case 1 -> {
 
-            switch (scelta) {
-                case 0 -> System.out.println("-------CHIUSURA PROGRAMMA------");
-                case 1 -> {
-                    System.out.println("------ LISTA PRODOTTI------");
-                    System.out.println(gameStop);
-                }
-                case 2 -> {
-                    System.out.println("----SELEZIONA-----");
-                    System.out.println("----1 per creare un videogioco-----");
-                    System.out.println("----2 per creare un gioco da tavola-----");
-                    int tipoDiGioco = Integer.parseInt(scanner.nextLine().trim());
-                    switch (tipoDiGioco) {
-                        case 1 -> {
-                            System.out.println("-----Inserisci il titolo-----");
-                            String titolo = scanner.nextLine().trim();
-                            System.out.println("-----Inserisco la data di oggi-----");
-                            LocalDate dataAttuale = LocalDate.now();
-                            System.out.println("-----Inserisci un prezzo-----");
-                            double prezzo = Double.parseDouble(scanner.nextLine().trim());
-                            System.out.println("-----Inserisci la piattaforma -----");
-                            System.out.println("---- (disponibile solo PC, PS5, XBOX, NINTENDOSWITCH2 ------");
-                            Piattaforma piattaforma = Piattaforma.valueOf(scanner.nextLine());
-                            System.out.println("-----Inserisci durata del gioco-----");
-                            int durataDelGioco = Integer.parseInt(scanner.nextLine().trim());
-                            System.out.println("-----Inserisci genere-----");
-                            System.out.println("---- (disponibile solo \n " +
-                                    "    ACTION,\n" +
-                                    "    ADVENTURE,\n" +
-                                    "    RPG,\n" +
-                                    "    FPS,\n" +
-                                    "    TPS,\n" +
-                                    "    STRATEGY,\n" +
-                                    "    SIMULATION,\n" +
-                                    "    SPORTS,\n" +
-                                    "    RACING,\n" +
-                                    "    PUZZLE,\n" +
-                                    "    HORROR,\n" +
-                                    "    SURVIVAL,\n" +
-                                    "    MMO,\n" +
-                                    "    PLATFORM,\n" +
-                                    "    FIGHTING ------");
-                            Genere genere = Genere.valueOf(scanner.nextLine().trim());
+                                    System.out.println("-----Inserisci il titolo-----");
+                                    String titolo = scanner.nextLine().trim();
+                                    System.out.println("-----Inserisco la data di oggi-----");
+                                    LocalDate dataAttuale = LocalDate.now();
+                                    double prezzo = 0;
+                                    while (true) {
+                                        try {
+                                            System.out.println("-----Inserisci un prezzo-----");
+                                            prezzo = Double.parseDouble(scanner.nextLine().trim());
+                                            break;
+                                        } catch (InputMismatchException e) {
+                                            System.out.println("valore non valido");
+                                            break;
+                                        }
+                                    }
 
-                            Gioco nuovoGioco = new VideoGioco(titolo, dataAttuale, prezzo, piattaforma, durataDelGioco, genere);
-                            gameStop.aggiuntaGioco(nuovoGioco);
+                                    System.out.println("-----Inserisci la piattaforma -----");
+                                    System.out.println("---- (disponibile solo PC, PS5, XBOX, NINTENDOSWITCH2 ------");
+                                    Piattaforma piattaforma = Piattaforma.valueOf(scanner.nextLine());
+                                    System.out.println("-----Inserisci durata del gioco-----");
+                                    int durataDelGioco = Integer.parseInt(scanner.nextLine().trim());
+                                    System.out.println("-----Inserisci genere-----");
+                                    System.out.println("---- (disponibile solo \n " +
+                                            "    ACTION,\n" +
+                                            "    ADVENTURE,\n" +
+                                            "    RPG,\n" +
+                                            "    FPS,\n" +
+                                            "    TPS,\n" +
+                                            "    STRATEGY,\n" +
+                                            "    SIMULATION,\n" +
+                                            "    SPORTS,\n" +
+                                            "    RACING,\n" +
+                                            "    PUZZLE,\n" +
+                                            "    HORROR,\n" +
+                                            "    SURVIVAL,\n" +
+                                            "    MMO,\n" +
+                                            "    PLATFORM,\n" +
+                                            "    FIGHTING ------");
+                                    Genere genere = Genere.valueOf(scanner.nextLine().trim());
+
+
+                                    Gioco nuovoGioco = new VideoGioco(titolo, dataAttuale, prezzo, piattaforma, durataDelGioco, genere);
+
+
+                                    gameStop.aggiuntaGioco(nuovoGioco);
+                                }
+
+
+                                case 2 -> {
+                                    try {
+
+
+                                        System.out.println("-----Inserisci il titolo-----");
+                                        String titolo = scanner.nextLine().trim();
+                                        System.out.println("-----Inserisco la data di oggi-----");
+                                        LocalDate dataAttuale = LocalDate.now();
+                                        System.out.println("-----Inserisci un prezzo-----");
+                                        double prezzo = Double.parseDouble(scanner.nextLine().trim());
+                                        System.out.println("-----Inserisci la piattaforma -----");
+                                        System.out.println("---- inserisci un numero da 2 a 10------");
+                                        int numeroDiGiocatori = Integer.parseInt(scanner.nextLine());
+                                        System.out.println("-----Inserisci durata media della partita-----");
+                                        int durataMediaPartita = Integer.parseInt(scanner.nextLine().trim());
+
+                                        Genere genere = Genere.valueOf(scanner.nextLine().trim());
+
+                                        Gioco nuovoGioco = new GiocoDaTavolo(titolo, dataAttuale, prezzo, numeroDiGiocatori, durataMediaPartita);
+                                        gameStop.aggiuntaGioco(nuovoGioco);
+                                    } catch (RuntimeException e) {
+                                        throw new RuntimeException("ERROR:" + e);
+                                    }
+                                }
+                                case 0 -> {
+                                    System.out.println("----- CHIUSURA CREAZIONE GIOCO------");
+                                    flag = false;
+                                }
+                            }
                         }
                     }
-                }
-                case 3 -> {
-                    System.out.println("***** inserisci l'id del gioco per crecarlo  *******");
-                    Long idGiocoDaCercare = Long.valueOf(scanner.nextLine().trim());
-                    gameStop.ricercaId(idGiocoDaCercare);
 
-                }
-                case 4 -> {
-                    System.out.println("****** inserisci un prezzo massimo *******");
-                    double prezzoMax = Double.parseDouble(scanner.nextLine().trim());
-                    System.out.println(gameStop.listaPrezziSottoX(prezzoMax));
+                    case 3 -> {
+                        System.out.println("***** inserisci l'id del gioco per crecarlo  *******");
+                        Long idGiocoDaCercare = Long.valueOf(scanner.nextLine().trim());
+                        gameStop.ricercaId(idGiocoDaCercare);
 
-                }
-                case 5 -> {
-                    System.out.println("****** inserisci i numero di giocatori *******");
-                    int numeroGiocatori = Integer.parseInt(scanner.nextLine().trim());
-                    System.out.println(gameStop.listaPerNGiocatori(numeroGiocatori));
-
-                }
-                case 6 -> {
-                    System.out.println(gameStop.getCollezione());
-                    System.out.println("****** inserisci l'id del gico da rimuovere *******");
-                    Long numeroId = Long.valueOf(scanner.nextLine().trim());
-                    gameStop.rimuoviPerId(numeroId);
-                    System.out.println("-----ELEMENTO RIMOSSO: " + " " + gameStop.ricercaId(numeroId) + "-------");
-                    System.out.println("-----" + gameStop.getCollezione() + "----");
-                }
-                case 7 -> {
-                    System.out.println("----- PRIMA CREIAMO UN NUOVO GIOCO------");
-                    System.out.println("-----Inserisci il titolo-----");
-                    String titolo = scanner.nextLine().trim();
-                    System.out.println("-----Inserisco la data di oggi-----");
-                    LocalDate dataAttuale = LocalDate.now();
-                    System.out.println("-----Inserisci un prezzo-----");
-                    double prezzo = Double.parseDouble(scanner.nextLine().trim());
-                    System.out.println("-----Inserisci la piattaforma -----");
-                    System.out.println("---- (disponibile solo PC, PS5, XBOX, NINTENDOSWITCH2 ------");
-                    Piattaforma piattaforma = Piattaforma.valueOf(scanner.nextLine());
-                    System.out.println("-----Inserisci durata del gioco-----");
-                    int durataDelGioco = Integer.parseInt(scanner.nextLine().trim());
-                    System.out.println("-----Inserisci genere-----");
-                    System.out.println("---- (disponibile solo \n " +
-                            "    ACTION,\n" +
-                            "    ADVENTURE,\n" +
-                            "    RPG,\n" +
-                            "    FPS,\n" +
-                            "    TPS,\n" +
-                            "    STRATEGY,\n" +
-                            "    SIMULATION,\n" +
-                            "    SPORTS,\n" +
-                            "    RACING,\n" +
-                            "    PUZZLE,\n" +
-                            "    HORROR,\n" +
-                            "    SURVIVAL,\n" +
-                            "    MMO,\n" +
-                            "    PLATFORM,\n" +
-                            "    FIGHTING ------");
-                    Genere genere = Genere.valueOf(scanner.nextLine().trim());
-
-                    Gioco nuovoGioco = new VideoGioco(titolo, dataAttuale, prezzo, piattaforma, durataDelGioco, genere);
-                    System.out.println("-----SCEGLI IL NUMERO DELL GIOCO DA SOSTITUIRE-----");
-                    for (int i = 0; i < gameStop.getCollezione().size(); i++) {
-                        Gioco gioco = gameStop.getCollezione().get(i);
-
-                        System.out.println(
-                                "Indice: " + i +
-                                        " - ID: " + gioco.getId() +
-                                        " - Titolo: " + gioco.getTitolo()
-                        );
                     }
-                    int sceltaUtente = Integer.parseInt(scanner.nextLine());
-                    int indiceLista = sceltaUtente - 1;
+                    case 4 -> {
+                        System.out.println("****** inserisci un prezzo massimo *******");
+                        double prezzoMax = Double.parseDouble(scanner.nextLine().trim());
+                        System.out.println(gameStop.listaPrezziSottoX(prezzoMax));
 
-                    if (indiceLista >= 0 && indiceLista < gameStop.getCollezione().size()) {
-                        Gioco giocoScelto = gameStop.getCollezione().get(indiceLista);
-                        System.out.println("Hai scelto: " + giocoScelto.getTitolo());
-                        gameStop.aggiornamentoPerId(giocoScelto.getId(), nuovoGioco);
-                    } else {
-                        System.out.println("Scelta non valida");
+                    }
+                    case 5 -> {
+                        System.out.println("****** inserisci i numero di giocatori *******");
+                        int numeroGiocatori = Integer.parseInt(scanner.nextLine().trim());
+                        System.out.println(gameStop.listaPerNGiocatori(numeroGiocatori));
+
+                    }
+                    case 6 -> {
+                        System.out.println(gameStop.getCollezione());
+                        System.out.println("****** inserisci l'id del gico da rimuovere *******");
+                        Long numeroId = Long.valueOf(scanner.nextLine().trim());
+                        gameStop.rimuoviPerId(numeroId);
+                        System.out.println("-----ELEMENTO RIMOSSO: " + " " + gameStop.ricercaId(numeroId) + "-------");
+                        System.out.println("-----" + gameStop.getCollezione() + "----");
+                    }
+                    case 7 -> {
+                        System.out.println("----- PRIMA CREIAMO UN NUOVO GIOCO------");
+                        System.out.println("-----Inserisci il titolo-----");
+                        String titolo = scanner.nextLine().trim();
+                        System.out.println("-----Inserisco la data di oggi-----");
+                        LocalDate dataAttuale = LocalDate.now();
+                        System.out.println("-----Inserisci un prezzo-----");
+                        double prezzo = Double.parseDouble(scanner.nextLine().trim());
+                        System.out.println("-----Inserisci la piattaforma -----");
+                        System.out.println("---- (disponibile solo PC, PS5, XBOX, NINTENDOSWITCH2 ------");
+                        Piattaforma piattaforma = Piattaforma.valueOf(scanner.nextLine());
+                        System.out.println("-----Inserisci durata del gioco-----");
+                        int durataDelGioco = Integer.parseInt(scanner.nextLine().trim());
+                        System.out.println("-----Inserisci genere-----");
+                        System.out.println("---- (disponibile solo \n " +
+                                "    ACTION,\n" +
+                                "    ADVENTURE,\n" +
+                                "    RPG,\n" +
+                                "    FPS,\n" +
+                                "    TPS,\n" +
+                                "    STRATEGY,\n" +
+                                "    SIMULATION,\n" +
+                                "    SPORTS,\n" +
+                                "    RACING,\n" +
+                                "    PUZZLE,\n" +
+                                "    HORROR,\n" +
+                                "    SURVIVAL,\n" +
+                                "    MMO,\n" +
+                                "    PLATFORM,\n" +
+                                "    FIGHTING ------");
+                        Genere genere = Genere.valueOf(scanner.nextLine().trim());
+
+                        Gioco nuovoGioco = new VideoGioco(titolo, dataAttuale, prezzo, piattaforma, durataDelGioco, genere);
+                        System.out.println("-----SCEGLI IL NUMERO DELL GIOCO DA SOSTITUIRE-----");
+                        for (int i = 0; i < gameStop.getCollezione().size(); i++) {
+                            Gioco gioco = gameStop.getCollezione().get(i);
+
+                            System.out.println(
+                                    "Indice: " + (i + 1) +
+                                            " - ID: " + gioco.getId() +
+                                            " - Titolo: " + gioco.getTitolo()
+                            );
+                        }
+                        int sceltaUtente = Integer.parseInt(scanner.nextLine());
+                        int indiceLista = sceltaUtente - 1;
+
+                        if (indiceLista >= 0 && indiceLista < gameStop.getCollezione().size()) {
+                            Gioco giocoScelto = gameStop.getCollezione().get(indiceLista);
+                            System.out.println("Hai scelto: " + giocoScelto.getTitolo());
+                            gameStop.aggiornamentoPerId(giocoScelto.getId(), nuovoGioco);
+                        } else {
+                            System.out.println("Scelta non valida");
+                        }
+
+
+                    }
+                    case 8 -> {
+                        gameStop.statisticheDellaCollezione();
                     }
 
-
                 }
-                case 8 -> {
-                    gameStop.statisticheDellaCollezione();
-                }
-
+            } catch (Exception e) {
+                System.out.println("inserisci un valore valido");
             }
         }
 
