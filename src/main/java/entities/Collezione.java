@@ -4,19 +4,19 @@ import java.util.*;
 
 public class Collezione {
 
-    private List<Giochi> collezione;
+    private List<Gioco> collezione;
 
     public Collezione() {
         this.collezione = new ArrayList<>();
     }
 
 
-    public List<Giochi> getCollezione() {
+    public List<Gioco> getCollezione() {
         return collezione;
     }
 
     //esercizio 1
-    public void aggiuntaGioco(Giochi gioco) {
+    public void aggiuntaGioco(Gioco gioco) {
         try {
             boolean checkID = collezione.stream().anyMatch(g -> g.getId().equals(gioco.getId()));
             if (checkID) {
@@ -32,15 +32,15 @@ public class Collezione {
     }
 
     //esercizio 2
-    public Giochi ricercaId(Long id) {
-        Optional<Giochi> giocoperID = collezione.stream()
-                .filter(giochi -> giochi.getId().equals(id))
+    public Gioco ricercaId(Long id) {
+        Optional<Gioco> giocoperID = collezione.stream()
+                .filter(gioco -> gioco.getId().equals(id))
                 .findFirst();
 
 
         if (giocoperID.isPresent()) {
             System.out.println("GIOCO SELEZIONATO: " + " " + giocoperID);
-            Giochi trovato = giocoperID.get();
+            Gioco trovato = giocoperID.get();
             return trovato;
         } else {
             System.out.println("NESSUN GIOCO TROVATO");
@@ -51,9 +51,9 @@ public class Collezione {
 
     //esercizio 3
 
-    public List<Giochi> listaPrezziSottoX(double prezzo) {
-        List<Giochi> risultati = collezione.stream()
-                .filter(giochi -> giochi.getPrezzo() < prezzo)
+    public List<Gioco> listaPrezziSottoX(double prezzo) {
+        List<Gioco> risultati = collezione.stream()
+                .filter(gioco -> gioco.getPrezzo() < prezzo)
                 .toList();
 
         System.out.println("Trovati: " + risultati.size());
@@ -62,10 +62,10 @@ public class Collezione {
     }
 
     //esercizio 4
-    public List<GiochiDaTavolo> listaPerNGiocatori(int numeroGiocatori) {
+    public List<GiocoDaTavolo> listaPerNGiocatori(int numeroGiocatori) {
         return collezione.stream()
-                .filter(giochi -> giochi instanceof GiochiDaTavolo)
-                .map(giochi -> (GiochiDaTavolo) giochi)
+                .filter(gioco -> gioco instanceof GiocoDaTavolo)
+                .map(gioco -> (GiocoDaTavolo) gioco)
                 .filter(giochiDaTavolo -> giochiDaTavolo.getNumeroGiocatori() == numeroGiocatori)
                 .toList();
     }
@@ -73,14 +73,14 @@ public class Collezione {
     //esercizio 5
 
     public void rimuoviPerId(Long id) {
-        Giochi giocoDaRimuovere = ricercaId(id);
+        Gioco giocoDaRimuovere = ricercaId(id);
         collezione.remove(giocoDaRimuovere);
     }
 
 
     //esercizio 6
-    public void aggiornamentoPerId(Long id, Giochi nuovoGioco) {
-        Giochi giocoDaAggiornare = ricercaId(id);
+    public void aggiornamentoPerId(Long id, Gioco nuovoGioco) {
+        Gioco giocoDaAggiornare = ricercaId(id);
         int indexGiocoDaAggiornare = collezione.indexOf(giocoDaAggiornare);
 
         nuovoGioco.setId(id);
@@ -96,18 +96,18 @@ public class Collezione {
 
             System.out.println("--------STATISTICHE--------");
             Long lunghezzaVideogiochi = collezione.stream()
-                    .filter(giochi -> giochi instanceof VideoGiochi).count();
+                    .filter(gioco -> gioco instanceof VideoGioco).count();
 
             System.out.println("------VIDEOGIOCHI TOTALI:" + " " + lunghezzaVideogiochi + "---------");
 
 
             Long lunghezzaGiochiDaTavola = collezione.stream()
-                    .filter(giochi -> giochi instanceof GiochiDaTavolo).count();
+                    .filter(gioco -> gioco instanceof GiocoDaTavolo).count();
 
             System.out.println("------VIDEOGIOCHI TOTALI:" + " " + lunghezzaGiochiDaTavola + "---------");
 
-            Optional<Giochi> giocoPrezzoPiuAlto = collezione.stream()
-                    .max(Comparator.comparingDouble(Giochi::getPrezzo));
+            Optional<Gioco> giocoPrezzoPiuAlto = collezione.stream()
+                    .max(Comparator.comparingDouble(Gioco::getPrezzo));
 
             if (giocoPrezzoPiuAlto.isPresent()) {
                 System.out.println("IL GIOCO PIU COSTOSO E':" + " " + giocoPrezzoPiuAlto);
@@ -115,7 +115,7 @@ public class Collezione {
                 System.out.println("nessun dato a disposizione");
             }
 
-            OptionalDouble mediaPrezziTot = collezione.stream().mapToDouble(Giochi::getPrezzo).average();
+            OptionalDouble mediaPrezziTot = collezione.stream().mapToDouble(Gioco::getPrezzo).average();
 
             if (mediaPrezziTot.isPresent()) {
                 System.out.println("MEDIA PREZZO TOTALE:" + " " + mediaPrezziTot);

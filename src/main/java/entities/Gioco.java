@@ -2,7 +2,7 @@ package entities;
 
 import java.time.LocalDate;
 
-public abstract class Giochi {
+public abstract class Gioco {
     // counter generazione ID
     private static Long counter = 1L;
     //ATTRIBUTI
@@ -12,7 +12,7 @@ public abstract class Giochi {
     private double prezzo;
 
     //COSTRUTTORE
-    public Giochi(String titolo, LocalDate annoPubblicazione, double prezzo) {
+    public Gioco(String titolo, LocalDate annoDiPubblicazione, double prezzo) {
         this.id = counter++;
         this.titolo = titolo;
         this.annoDiPubblicazione = annoDiPubblicazione;
@@ -54,11 +54,10 @@ public abstract class Giochi {
 
     @Override
     public String toString() {
-        return "Giochi{" +
-                "id=" + id +
-                ", titolo='" + titolo + '\'' +
-                ", annoDiPubblicazione=" + annoDiPubblicazione +
-                ", prezzo=" + prezzo +
-                '}';
+        return "id=" + id + "\n" +
+                ", titolo='" + titolo + '\'' + "\n" +
+                ", annoDiPubblicazione=" + annoDiPubblicazione + "\n" +
+                ", prezzo=" + prezzo + "\n" +
+                '}' + "\n";
     }
 }
