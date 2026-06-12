@@ -10,8 +10,8 @@ public class VideoGiochi extends Giochi {
     private Genere genere;
 
 
-    public VideoGiochi(Long id, String titolo, LocalDate annoDiPubblicazione, double prezzo, String piattaforma, int durataGioco, Genere genere) {
-        super(id, titolo, annoDiPubblicazione, prezzo);
+    public VideoGiochi(String titolo, LocalDate annoDiPubblicazione, double prezzo, String piattaforma, int durataGioco, Genere genere) {
+        super(titolo, annoDiPubblicazione, prezzo);
         this.piattaforma = piattaforma;
         this.durataGioco = durataGioco;
         this.genere = genere;

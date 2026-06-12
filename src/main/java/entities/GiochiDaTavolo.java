@@ -7,8 +7,8 @@ public class GiochiDaTavolo extends Giochi {
     private int durataMediaPartita;
 
 
-    public GiochiDaTavolo(Long id, String titolo, LocalDate annoPubblicazione, double prezzo, int numeroGiocatori, int durataMediaPartita) {
-        super(id, titolo, annoPubblicazione, prezzo);
+    public GiochiDaTavolo(String titolo, LocalDate annoPubblicazione, double prezzo, int numeroGiocatori, int durataMediaPartita) {
+        super(titolo, annoPubblicazione, prezzo);
 
         this.numeroGiocatori = numeroGiocatori;
         this.durataMediaPartita = durataMediaPartita;

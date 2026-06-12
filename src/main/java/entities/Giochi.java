@@ -3,24 +3,30 @@ package entities;
 import java.time.LocalDate;
 
 public abstract class Giochi {
+    // counter generazione ID
+    private static Long counter = 1L;
+    //ATTRIBUTI
     private Long id;
     private String titolo;
     private LocalDate annoDiPubblicazione;
     private double prezzo;
 
-
-    public Giochi(Long id, String titolo, LocalDate annoPubblicazione, double prezzo) {
-        this.id = id;
+    //COSTRUTTORE
+    public Giochi(String titolo, LocalDate annoPubblicazione, double prezzo) {
+        this.id = counter++;
         this.titolo = titolo;
         this.annoDiPubblicazione = annoDiPubblicazione;
         this.prezzo = prezzo;
     }
 
-
+    //METODI
     public Long getId() {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getTitolo() {
         return titolo;
