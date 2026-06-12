@@ -39,7 +39,7 @@ public class Collezione {
 
 
         if (giocoperID.isPresent()) {
-            System.out.println("GIOCO SELEZIONATO: " + " " + giocoperID);
+            System.out.println("GIOCO SELEZIONATO: " + " " + giocoperID.get());
             Gioco trovato = giocoperID.get();
             return trovato;
         } else {
