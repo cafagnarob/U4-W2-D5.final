@@ -175,7 +175,7 @@ public class Application {
                                         int numeroDiGiocatori = Integer.parseInt(scanner.nextLine());
                                         System.out.println("-----Inserisci durata media della partita-----");
                                         int durataMediaPartita = Integer.parseInt(scanner.nextLine().trim());
-                                        
+
                                         Gioco nuovoGioco = new GiocoDaTavolo(titolo, dataAttuale, prezzo, numeroDiGiocatori, durataMediaPartita);
                                         gameStop.aggiuntaGioco(nuovoGioco);
                                     } catch (RuntimeException e) {
@@ -212,9 +212,11 @@ public class Application {
                         System.out.println(gameStop.getCollezione());
                         System.out.println("****** inserisci l'id del gico da rimuovere *******");
                         Long numeroId = Long.valueOf(scanner.nextLine().trim());
+                        Gioco rimosso = gameStop.ricercaId(numeroId);
                         gameStop.rimuoviPerId(numeroId);
-                        System.out.println("-----ELEMENTO RIMOSSO: " + " " + gameStop.ricercaId(numeroId) + "-------");
-                        System.out.println("-----" + gameStop.getCollezione() + "----");
+
+                        System.out.println("ELEMENTO RIMOSSO: " + rimosso);
+                        System.out.println(gameStop.getCollezione());
                     }
                     case 7 -> {
                         System.out.println("----- PRIMA CREIAMO UN NUOVO GIOCO------");
