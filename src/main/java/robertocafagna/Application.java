@@ -8,7 +8,6 @@ import entities.enums.Genere;
 import entities.enums.Piattaforma;
 
 import java.time.LocalDate;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Application {
@@ -123,7 +122,7 @@ public class Application {
                                             System.out.println("-----Inserisci un prezzo-----");
                                             prezzo = Double.parseDouble(scanner.nextLine().trim());
                                             break;
-                                        } catch (InputMismatchException e) {
+                                        } catch (NumberFormatException e) {
                                             System.out.println("valore non valido");
                                             break;
                                         }
@@ -176,9 +175,7 @@ public class Application {
                                         int numeroDiGiocatori = Integer.parseInt(scanner.nextLine());
                                         System.out.println("-----Inserisci durata media della partita-----");
                                         int durataMediaPartita = Integer.parseInt(scanner.nextLine().trim());
-
-                                        Genere genere = Genere.valueOf(scanner.nextLine().trim());
-
+                                        
                                         Gioco nuovoGioco = new GiocoDaTavolo(titolo, dataAttuale, prezzo, numeroDiGiocatori, durataMediaPartita);
                                         gameStop.aggiuntaGioco(nuovoGioco);
                                     } catch (RuntimeException e) {
