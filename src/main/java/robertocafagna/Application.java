@@ -187,7 +187,7 @@ public class Application {
                                 }
                                 case 0 -> {
                                     System.out.println("----- CHIUSURA CREAZIONE GIOCO------");
-                                    flag = false;
+                                    flag2 = false;
                                 }
                             }
                         }
