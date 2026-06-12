@@ -104,13 +104,13 @@ public class Collezione {
             Long lunghezzaGiochiDaTavola = collezione.stream()
                     .filter(gioco -> gioco instanceof GiocoDaTavolo).count();
 
-            System.out.println("------VIDEOGIOCHI TOTALI:" + " " + lunghezzaGiochiDaTavola + "---------");
+            System.out.println("------GIOCHI DA TAVOLO TOTALI:" + " " + lunghezzaGiochiDaTavola + "---------");
 
             Optional<Gioco> giocoPrezzoPiuAlto = collezione.stream()
                     .max(Comparator.comparingDouble(Gioco::getPrezzo));
 
             if (giocoPrezzoPiuAlto.isPresent()) {
-                System.out.println("IL GIOCO PIU COSTOSO E':" + " " + giocoPrezzoPiuAlto);
+                System.out.println("IL GIOCO PIU COSTOSO E':" + " " + giocoPrezzoPiuAlto.get());
             } else {
                 System.out.println("nessun dato a disposizione");
             }
@@ -118,7 +118,7 @@ public class Collezione {
             OptionalDouble mediaPrezziTot = collezione.stream().mapToDouble(Gioco::getPrezzo).average();
 
             if (mediaPrezziTot.isPresent()) {
-                System.out.println("MEDIA PREZZO TOTALE:" + " " + mediaPrezziTot);
+                System.out.println("MEDIA PREZZO TOTALE:" + " " + mediaPrezziTot.getAsDouble());
             } else {
                 System.out.println("non è stato possibile calcolare la media");
             }

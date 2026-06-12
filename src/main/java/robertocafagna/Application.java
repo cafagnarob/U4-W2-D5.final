@@ -12,6 +12,19 @@ import java.util.Scanner;
 
 public class Application {
 
+    public static void mostraMenu() {
+        System.out.println("**** SELEZIONA ****");
+        System.out.println("1 per consultare la lista prodotti ");
+        System.out.println("2 per aggiungere un gioco ");
+        System.out.println("3 per cerca un gioco  per id ");
+        System.out.println("4 per scegliere di vederi giochi sotto -X- prezzo");
+        System.out.println("5 per scegliere i GIOCHI DA TAVOLO per numero di giocatori");
+        System.out.println("6 per Rimuovare un gioco usando l'id");
+        System.out.println("7 per aggiornare/sostituire un gioco");
+        System.out.println("8 per stampare le statistiche ( numero totale di videogiochi, numero totale di giochi da tavolo, il gioco più costoso, la media prezzo del negozio)");
+        System.out.println("0 per uscire");
+    }
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
@@ -77,19 +90,10 @@ public class Application {
 
 
         System.out.println("-------- benvenuto a GAMESTOP------");
+
         boolean flag = true;
         while (flag) {
-
-            System.out.println("**** SELEZIONA ****");
-            System.out.println("1 per consultare la lista prodotti ");
-            System.out.println("2 per aggiungere un gioco ");
-            System.out.println("3 per cerca un gioco  per id ");
-            System.out.println("4 per scegliere di vederi giochi sotto -X- prezzo");
-            System.out.println("5 per scegliere i GIOCHI DA TAVOLO per numero di giocatori");
-            System.out.println("6 per Rimuovare un gioco usando l'id");
-            System.out.println("7 per aggiornare/sostituire un gioco");
-            System.out.println("8 per stampare le statistiche ( numero totale di videogiochi, numero totale di giochi da tavolo, il gioco più costoso, la media prezzo del negozio)");
-            System.out.println("0 per uscire");
+            mostraMenu();
             try {
                 int scelta = Integer.parseInt(scanner.nextLine().trim());
                 switch (scelta) {
@@ -111,7 +115,6 @@ public class Application {
                             int tipoDiGioco = Integer.parseInt(scanner.nextLine().trim());
                             switch (tipoDiGioco) {
                                 case 1 -> {
-
                                     System.out.println("-----Inserisci il titolo-----");
                                     String titolo = scanner.nextLine().trim();
                                     System.out.println("-----Inserisco la data di oggi-----");
