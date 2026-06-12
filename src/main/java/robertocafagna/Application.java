@@ -2,16 +2,12 @@ package robertocafagna;
 
 import entities.Collezione;
 import entities.Gioco;
-
 import entities.GiocoDaTavolo;
 import entities.VideoGioco;
 import entities.enums.Genere;
 import entities.enums.Piattaforma;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 import java.util.Scanner;
 
 public class Application {
@@ -51,49 +47,185 @@ public class Application {
         Gioco Pandemic = (new GiocoDaTavolo("Pandemic", LocalDate.of(2008, 1, 1), 39.99, 10, 60));
         Gioco Scrabble = (new GiocoDaTavolo("Scrabble", LocalDate.of(1948, 12, 1), 22.50, 4, 90));
 
-        List<Gioco> gameStop = new ArrayList<>(List.of(TickettoRide, ResidentEvil4Remake, DoomEternal, Starfield, FinalFantasyVIIRebirth, ApexLegends, LeagueofLegends,
-                Monopoly, Risiko, Catan, Dixit, ExplodingKittens, Wonders, Carcassonne, Scrabble, Pandemic, EldenRing, Cyberpunk2077, GodofWarRagnarok, TheLastofUsPartI,
-                HaloInfinite, ForzaHorizon5, ZeldaTearsoftheKingdom, SuperMarioBrosWonder, HadesII));
+        Collezione gameStop = new Collezione();
 
-        Collezione carello = new Collezione();
+        gameStop.aggiuntaGioco(TickettoRide);
+        gameStop.aggiuntaGioco(Scrabble);
+        gameStop.aggiuntaGioco(Carcassonne);
+        gameStop.aggiuntaGioco(Wonders);
+        gameStop.aggiuntaGioco(ExplodingKittens);
+        gameStop.aggiuntaGioco(Dixit);
+        gameStop.aggiuntaGioco(Catan);
+        gameStop.aggiuntaGioco(Risiko);
+        gameStop.aggiuntaGioco(Monopoly);
+        gameStop.aggiuntaGioco(LeagueofLegends);
+        gameStop.aggiuntaGioco(ApexLegends);
+        gameStop.aggiuntaGioco(FinalFantasyVIIRebirth);
+        gameStop.aggiuntaGioco(Starfield);
+        gameStop.aggiuntaGioco(DoomEternal);
+        gameStop.aggiuntaGioco(ResidentEvil4Remake);
+        gameStop.aggiuntaGioco(HaloInfinite);
+        gameStop.aggiuntaGioco(TheLastofUsPartI);
+        gameStop.aggiuntaGioco(GodofWarRagnarok);
+        gameStop.aggiuntaGioco(Cyberpunk2077);
+        gameStop.aggiuntaGioco(EldenRing);
+        gameStop.aggiuntaGioco(Pandemic);
+        gameStop.aggiuntaGioco(ForzaHorizon5);
+        gameStop.aggiuntaGioco(ZeldaTearsoftheKingdom);
+        gameStop.aggiuntaGioco(SuperMarioBrosWonder);
+        gameStop.aggiuntaGioco(HadesII);
 
 
         System.out.println("-------- benvenuto a GAMESTOP------");
-        while (true) {
-            System.out.println("------ LISTA PRODOTTI------");
-            System.out.println(gameStop);
-            System.out.println("-------KAREN: come posso aiutarti? :) -------");
 
-            System.out.println("------ TU: salve vorrei...------ ");
+        while (true) {
+
             System.out.println("**** SELEZIONA ****");
             System.out.println("1 per consultare la lista prodotti ");
-            System.out.println("2 per aggiungere un gioco al tuo carrello");
-            System.out.println("3 per cerca un gioco nella tuo carrello per id ");
+            System.out.println("2 per aggiungere un gioco ");
+            System.out.println("3 per cerca un gioco  per id ");
             System.out.println("4 per scegliere di vederi giochi sotto -X- prezzo");
             System.out.println("5 per scegliere i GIOCHI DA TAVOLO per numero di giocatori");
-            System.out.println("6 per Rimuovare un gioco dal carrello usando l'id");
-            System.out.println("7 per aggiornare/sostituire un gioco del tuo carrello");
-            System.out.println("8 per stampare le statistiche del negozio ( numero totale di videogiochi, numero totale di giochi da tavolo, il gioco più costoso, la media prezzo del negozio)");
-            System.out.println("0 per uscire dal negozio");
-            int scelta = Integer.parseInt(scanner.nextLine());
+            System.out.println("6 per Rimuovare un gioco usando l'id");
+            System.out.println("7 per aggiornare/sostituire un gioco");
+            System.out.println("8 per stampare le statistiche ( numero totale di videogiochi, numero totale di giochi da tavolo, il gioco più costoso, la media prezzo del negozio)");
+            System.out.println("0 per uscire");
+            int scelta = Integer.parseInt(scanner.nextLine().trim());
 
             switch (scelta) {
-                case 0 -> System.out.println("------- KAREN: Grazie e arrivederci :)------");
-                case 1 -> System.out.println(gameStop);
+                case 0 -> System.out.println("-------CHIUSURA PROGRAMMA------");
+                case 1 -> {
+                    System.out.println("------ LISTA PRODOTTI------");
+                    System.out.println(gameStop);
+                }
                 case 2 -> {
-                    System.out.println("------KAREN: segli quale gioco vuoi aggiungere...-------");
-                    System.out.println("------TU: vorrei....--------");
-                    String titoloGiocoSelezionato = scanner.nextLine();
-                    Optional<Gioco> giocoDaAggiungere = gameStop.stream()
-                            .filter(gioco -> gioco.getTitolo().equals(titoloGiocoSelezionato))
-                            .findFirst();
-                    if (giocoDaAggiungere.isPresent()) {
+                    System.out.println("----SELEZIONA-----");
+                    System.out.println("----1 per creare un videogioco-----");
+                    System.out.println("----2 per creare un gioco da tavola-----");
+                    int tipoDiGioco = Integer.parseInt(scanner.nextLine().trim());
+                    switch (tipoDiGioco) {
+                        case 1 -> {
+                            System.out.println("-----Inserisci il titolo-----");
+                            String titolo = scanner.nextLine().trim();
+                            System.out.println("-----Inserisco la data di oggi-----");
+                            LocalDate dataAttuale = LocalDate.now();
+                            System.out.println("-----Inserisci un prezzo-----");
+                            double prezzo = Double.parseDouble(scanner.nextLine().trim());
+                            System.out.println("-----Inserisci la piattaforma -----");
+                            System.out.println("---- (disponibile solo PC, PS5, XBOX, NINTENDOSWITCH2 ------");
+                            Piattaforma piattaforma = Piattaforma.valueOf(scanner.nextLine());
+                            System.out.println("-----Inserisci durata del gioco-----");
+                            int durataDelGioco = Integer.parseInt(scanner.nextLine().trim());
+                            System.out.println("-----Inserisci genere-----");
+                            System.out.println("---- (disponibile solo \n " +
+                                    "    ACTION,\n" +
+                                    "    ADVENTURE,\n" +
+                                    "    RPG,\n" +
+                                    "    FPS,\n" +
+                                    "    TPS,\n" +
+                                    "    STRATEGY,\n" +
+                                    "    SIMULATION,\n" +
+                                    "    SPORTS,\n" +
+                                    "    RACING,\n" +
+                                    "    PUZZLE,\n" +
+                                    "    HORROR,\n" +
+                                    "    SURVIVAL,\n" +
+                                    "    MMO,\n" +
+                                    "    PLATFORM,\n" +
+                                    "    FIGHTING ------");
+                            Genere genere = Genere.valueOf(scanner.nextLine().trim());
 
-                        carello.aggiuntaGioco(giocoDaAggiungere.get());
-                    } else {
-                        System.out.println("gioco non trovato");
+                            Gioco nuovoGioco = new VideoGioco(titolo, dataAttuale, prezzo, piattaforma, durataDelGioco, genere);
+                            gameStop.aggiuntaGioco(nuovoGioco);
+                        }
                     }
                 }
+                case 3 -> {
+                    System.out.println("***** inserisci l'id del gioco per crecarlo  *******");
+                    Long idGiocoDaCercare = Long.valueOf(scanner.nextLine().trim());
+                    gameStop.ricercaId(idGiocoDaCercare);
+
+                }
+                case 4 -> {
+                    System.out.println("****** inserisci un prezzo massimo *******");
+                    double prezzoMax = Double.parseDouble(scanner.nextLine().trim());
+                    System.out.println(gameStop.listaPrezziSottoX(prezzoMax));
+
+                }
+                case 5 -> {
+                    System.out.println("****** inserisci i numero di giocatori *******");
+                    int numeroGiocatori = Integer.parseInt(scanner.nextLine().trim());
+                    System.out.println(gameStop.listaPerNGiocatori(numeroGiocatori));
+
+                }
+                case 6 -> {
+                    System.out.println(gameStop.getCollezione());
+                    System.out.println("****** inserisci l'id del gico da rimuovere *******");
+                    Long numeroId = Long.valueOf(scanner.nextLine().trim());
+                    gameStop.rimuoviPerId(numeroId);
+                    System.out.println("-----ELEMENTO RIMOSSO: " + " " + gameStop.ricercaId(numeroId) + "-------");
+                    System.out.println("-----" + gameStop.getCollezione() + "----");
+                }
+                case 7 -> {
+                    System.out.println("----- PRIMA CREIAMO UN NUOVO GIOCO------");
+                    System.out.println("-----Inserisci il titolo-----");
+                    String titolo = scanner.nextLine().trim();
+                    System.out.println("-----Inserisco la data di oggi-----");
+                    LocalDate dataAttuale = LocalDate.now();
+                    System.out.println("-----Inserisci un prezzo-----");
+                    double prezzo = Double.parseDouble(scanner.nextLine().trim());
+                    System.out.println("-----Inserisci la piattaforma -----");
+                    System.out.println("---- (disponibile solo PC, PS5, XBOX, NINTENDOSWITCH2 ------");
+                    Piattaforma piattaforma = Piattaforma.valueOf(scanner.nextLine());
+                    System.out.println("-----Inserisci durata del gioco-----");
+                    int durataDelGioco = Integer.parseInt(scanner.nextLine().trim());
+                    System.out.println("-----Inserisci genere-----");
+                    System.out.println("---- (disponibile solo \n " +
+                            "    ACTION,\n" +
+                            "    ADVENTURE,\n" +
+                            "    RPG,\n" +
+                            "    FPS,\n" +
+                            "    TPS,\n" +
+                            "    STRATEGY,\n" +
+                            "    SIMULATION,\n" +
+                            "    SPORTS,\n" +
+                            "    RACING,\n" +
+                            "    PUZZLE,\n" +
+                            "    HORROR,\n" +
+                            "    SURVIVAL,\n" +
+                            "    MMO,\n" +
+                            "    PLATFORM,\n" +
+                            "    FIGHTING ------");
+                    Genere genere = Genere.valueOf(scanner.nextLine().trim());
+
+                    Gioco nuovoGioco = new VideoGioco(titolo, dataAttuale, prezzo, piattaforma, durataDelGioco, genere);
+                    System.out.println("-----SCEGLI IL NUMERO DELL GIOCO DA SOSTITUIRE-----");
+                    for (int i = 0; i < gameStop.getCollezione().size(); i++) {
+                        Gioco gioco = gameStop.getCollezione().get(i);
+
+                        System.out.println(
+                                "Indice: " + i +
+                                        " - ID: " + gioco.getId() +
+                                        " - Titolo: " + gioco.getTitolo()
+                        );
+                    }
+                    int sceltaUtente = Integer.parseInt(scanner.nextLine());
+                    int indiceLista = sceltaUtente - 1;
+
+                    if (indiceLista >= 0 && indiceLista < gameStop.getCollezione().size()) {
+                        Gioco giocoScelto = gameStop.getCollezione().get(indiceLista);
+                        System.out.println("Hai scelto: " + giocoScelto.getTitolo());
+                        gameStop.aggiornamentoPerId(giocoScelto.getId(), nuovoGioco);
+                    } else {
+                        System.out.println("Scelta non valida");
+                    }
+
+
+                }
+                case 8 -> {
+                    gameStop.statisticheDellaCollezione();
+                }
+
             }
         }
 
